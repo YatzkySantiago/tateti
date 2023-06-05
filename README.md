@@ -4,7 +4,7 @@ Juego de tateti desarrollado en Introduccion a la Programacion (FAI)
 
 ## MATERIA
 
-A;o 2023
+Año 2023
 Introduccion a la Programacion
 Tecnicatura Universitaria en Desarrollo Web
 FAI
