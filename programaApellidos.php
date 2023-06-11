@@ -72,8 +72,8 @@ function MostrarDatosJuego($numJuego){
 
     echo "**********************\n";
     echo "Juego TATETI: ".$numJuego." ".$resultado."\n";
-    echo "Jugador X: ".$coleccionJuegos[$numJuego]["jugadorCruz"]." Obtuvo ".$coleccionJuegos[$numJuego]["puntosCruz"]." puntos\n";
-    echo "Jugador O: ".$coleccionJuegos[$numJuego]["jugadorCirculo"]." Obtuvo ".$coleccionJuegos[$numJuego]["puntosCirculo"]." puntos\n";
+    echo "Jugador X: ".$datosJuego[$numJuego]["jugadorCruz"]." Obtuvo ".$datosJuego[$numJuego]["puntosCruz"]." puntos\n";
+    echo "Jugador O: ".$datosJuego[$numJuego]["jugadorCirculo"]." Obtuvo ".$datosJuego[$numJuego]["puntosCirculo"]." puntos\n";
     echo "**********************\n";
 }
 
