@@ -123,8 +123,8 @@ do {
 
             break;
         case 2: 
-            $countJuegos = cargarJuegos();
-            $cantJuegosJugados = count($countJuegos);
+            $countJuegos /*array sin declarar*/ = cargarJuegos();
+            $cantJuegosJugados /*variable sin declarar*/ = count($countJuegos);
             echo "Ingrese un numero del 0 al ".($cantJuegosJugados - 1).": ";
             $nJuego = trim(fgets(STDIN));
             if ($nJuego >= 0 && $nJuego <= ($cantJuegosJugados - 1)) {
