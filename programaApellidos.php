@@ -59,7 +59,7 @@ function seleccionarOpcion (){
 /** Muestra en pantalla los datos de un juego
  * @param int $numJuego
  */
-function MostrarDatosJuego($numJuego){
+function mostrarDatosJuego($numJuego){
     // array $datosJuego
     $datosJuego = cargarJuegos();
     if($datosJuego[$numJuego]["puntosCruz"] == $datosJuego[$numJuego]["puntosCirculo"]){
@@ -112,7 +112,6 @@ function agregarJuego($coleccionJuegos, $unJuego){
 
 
 
-
 do {
     $opcion = seleccionarOpcion();
 
@@ -120,13 +119,22 @@ do {
     switch ($opcion) {
         case 1: 
             $juego = jugar();
-            print_r($juego);
+            imprimirResultado($juego);
 
             break;
         case 2: 
-            echo "Ingrese un numero: ";
+            $countJuegos = cargarJuegos();
+            $cantJuegosJugados = count($countJuegos);
+            echo "Ingrese un numero del 0 al ".($cantJuegosJugados - 1).": ";
             $nJuego = trim(fgets(STDIN));
-            MostrarDatosJuego($nJuego);
+            if ($nJuego >= 0 && $nJuego <= ($cantJuegosJugados - 1)) {
+                mostrarDatosJuego($nJuego);
+            }
+            else {
+                echo "**********************\n";
+                echo "Ese juego no existe \n";
+                echo "**********************\n";
+            }
 
             break;
         case 3: 
@@ -134,15 +142,15 @@ do {
 
             break;
         case 4: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 4
     
             break;  
         case 5: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 5
     
             break;
         case 6: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 6
     
             break;
         case 7: 
