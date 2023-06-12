@@ -77,7 +77,7 @@ function mostrarDatosJuego($numJuego){
     }else{//($coleccionJuegos[$numJuego]["puntosCruz"] < $coleccionJuegos[$numJuego]["puntosCirculo"])
         $resultado = "(Gano O)";
     }
-
+    
     echo "**********************\n";
     echo "Juego TATETI: ".$numJuego." ".$resultado."\n";
     echo "Jugador X: ".$datosJuego[$numJuego]["jugadorCruz"]." Obtuvo ".$datosJuego[$numJuego]["puntosCruz"]." puntos\n";
@@ -93,10 +93,9 @@ function mostrarDatosJuego($numJuego){
  */
 function agregarJuego($coleccionJuegos, $unJuego){
     // array $coleccionModificada
-    $coleccionModificada = array_push($coleccionJuegos, $unJuego);
-    return $coleccionModificada;  
+    array_push($coleccionJuegos, $unJuego);
+    return $coleccionJuegos;
 }
-
 
 /** Opcion que muestra el primer juego ganado en base a un nombre solicitado al usuario
  * @param array $coleccionJuegos
@@ -134,6 +133,7 @@ function primerJuegoGanado($coleccionJuegos,$nombre){
 
 
 //Inicialización de variables:
+$z = 0;
 
 //Proceso:
 
@@ -141,8 +141,8 @@ function primerJuegoGanado($coleccionJuegos,$nombre){
 //print_r($juego);
 //imprimirResultado($juego);
 
-
-
+$coleccionActual = cargarJuegos();
+$coleccionModificada = cargarJuegos();
 do {
     $opcion = seleccionarOpcion();
 
@@ -152,16 +152,21 @@ do {
             //opcion que permite jugar al tateti.
             $juego = jugar();
             imprimirResultado($juego);
+            $coleccionModificada = agregarJuego($coleccionActual, $juego);
+            $z = 1;
 
             break;
         case 2: 
             //opcion que muestra un juego de la coleccion en base a un numero solicitado al user.
-            $countJuegos = cargarJuegos();
+            $countJuegos = $coleccionModificada;
             $cantJuegosJugados = count($countJuegos);
-            echo "Ingrese un numero del 0 al ".($cantJuegosJugados - 1).": ";
+            echo "Ingrese un numero del 1 al ".($cantJuegosJugados).": ";
             $nJuego = trim(fgets(STDIN));
-            if ($nJuego >= 0 && $nJuego <= ($cantJuegosJugados - 1)) {
-                mostrarDatosJuego($nJuego);
+            if ($z == 1) {
+                print_r($coleccionModificada[$nJuego - 1]);
+            }
+            elseif ($nJuego >= 0 && $nJuego <= ($cantJuegosJugados)) {
+                mostrarDatosJuego($nJuego - 1);
             }
             else {
                 echo "**********************\n";
