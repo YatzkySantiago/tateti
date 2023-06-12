@@ -15,9 +15,9 @@ include_once("tateti.php");
         - mail 
         - usuario github */
 
-    /*  - nombre apellido 
-        - legajo carrera 
-        - mail 
+    /*  - Lautaro Morales 
+        - FAI[4221] tudw 
+        - lautamorales123@gmail.com 
         - usuario github */
 
 /**************************************/
@@ -98,6 +98,62 @@ function agregarJuego($coleccionJuegos, $unJuego){
 }
    
 
+/**
+ * @param array $arrayJuegos
+ * @param string $unNombre
+ * @return array
+ */
+    function resumirJugador ($arrayJuegos, $unNombre){
+        //int $cantJuegosGanados
+        //int $cantJuegosPerdidos
+        //int $cantJuegosEmpatados
+        //int $totalPuntosJugador
+        $cantJuegosEmpatados =0;
+        $cantJuegosGanados = 0;
+        $cantJuegosPerdidos = 0;
+        print_r($arrayJuegos);
+
+        for ($i = 0; $i < count($arrayJuegos); $i++){
+            if ($unNombre == $arrayJuegos [$i-1]["jugadorCruz"]&& ($arrayJuegos [$i-1]["puntosCruz"]> $arrayJuegos [$i-1]["puntosCirculo"])){
+                $cantJuegosGanados++;
+            }elseif ($unNombre == $arrayJuegos [$i-1]["jugadorCruz"]&& ($arrayJuegos [$i]["puntosCruz"]< $arrayJuegos [$i-1]["puntosCirculo"])){
+                $cantJuegosPerdidos++;
+            }else{
+                $cantJuegosEmpatados++;
+            }
+            if ($unNombre == $arrayJuegos [$i-1]["jugadorCirculo"]&& ($arrayJuegos [$i-1]["puntosCirculo"]> $arrayJuegos [$i-1]["puntosCruz"])){
+                $cantJuegosGanados++;
+            }elseif ($unNombre == $arrayJuegos [$i-1]["jugadorCirculo"]&& ($arrayJuegos [$i-1]["puntosCirculo"]< $arrayJuegos [$i-1]["puntosCruz"])){
+                $cantJuegosPerdidos++;
+            }else{
+                $cantJuegosEmpatados++;
+            }
+           
+        }
+        if ($cantJuegosGanados>0){
+            $totalPuntosJugador = 0;
+            for ($i =0; $i<count($arrayJuegos); $i++){
+                if ($unNombre == $arrayJuegos [$i-1]["jugadorCruz"]){ 
+                    $totalPuntosJugador+= $arrayJuegos [$i-1]["puntosCruz"];
+                }elseif ($unNombre == $arrayJuegos [$i-1]["jugadorCirculo"]){
+                    $totalPuntosJugador+= $arrayJuegos[$i-1]["jugadorCirculo"];
+                } 
+            }
+        }   
+        
+            
+
+
+        //array $resumenUnJugador
+        $resumenUnJugador = [];
+        $resumenUnJugador ["nombre"] = $unNombre;
+        $resumenUnJugador ["juegosGanados"] = $cantJuegosGanados;
+        $resumenUnJugador ["juegosPerdidos"] = $cantJuegosPerdidos;
+        $resumenUnJugador ["juegosEmpatados"] = $cantJuegosEmpatados;
+        $resumenUnJugador ["puntosAcumulados"] = $totalPuntosJugador;
+
+    return $resumenUnJugador;
+    }
 
 
 /**************************************/
@@ -169,7 +225,20 @@ do {
     
             break;  
         case 5: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 5
+           //opción que muestra en pantalla el resumen de un jugador 
+           echo "Ingrese el nombre del jugador para ver su resumen: ";
+           $nombreIngresado = strtoupper(trim(fgets(STDIN)));
+           $todosLosJuegos = cargarJuegos();
+           $datosJugador = resumirJugador($todosLosJuegos, $nombreIngresado);
+            echo "*************************************\n";
+            echo "JUGADOR " .strtoupper($nombreIngresado)."\n";
+            echo "GANÓ ". $datosJugador["juegosGanados"]."\n";
+            echo "PERDIÓ ". $datosJugador["juegosPerdidos"]."\n";
+            echo "EMPATÓ ". $datosJugador["juegosEmpatados"]."\n";
+            echo "Total de puntos acumulados: " .$datosJugador["puntosAcumulados"]."\n";
+            echo "*************************************\n";
+          
+           
     
             break;
         case 6: 
