@@ -134,7 +134,6 @@ function primerJuegoGanado($coleccionJuegos,$nombre){
 
 
 //Inicialización de variables:
-$i = 0;
 
 //Proceso:
 
@@ -176,7 +175,8 @@ do {
             $nombreJugador = trim(fgets(STDIN));
             $nJuegos = cargarJuegos();
             $primerJuego = primerJuegoGanado($nJuegos,$nombreJugador);
-            echo $primerJuego."\n";
+            mostrarDatosJuego($primerJuego);
+
             break;
         case 4: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 4

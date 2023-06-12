@@ -104,7 +104,7 @@ function solicitarCasilleroLibre($tableroTateti)
             echo "El casillero ingresado se encuentra ocupado! Ingrese un casillero libre.\n";
         }
     } while (!$esLibre);
-    $casillerolibre = ["fila" => $nroFila, "colum0na" => $nroColumna];
+    $casillerolibre = ["fila" => $nroFila, "columna" => $nroColumna];
     return $casillerolibre;
 }
 
