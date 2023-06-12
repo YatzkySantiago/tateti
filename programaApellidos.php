@@ -111,19 +111,18 @@ function agregarJuego($coleccionJuegos, $unJuego){
         $cantJuegosEmpatados =0;
         $cantJuegosGanados = 0;
         $cantJuegosPerdidos = 0;
-        print_r($arrayJuegos);
-
+       
         for ($i = 0; $i < count($arrayJuegos); $i++){
-            if ($unNombre == $arrayJuegos [$i-1]["jugadorCruz"]&& ($arrayJuegos [$i-1]["puntosCruz"]> $arrayJuegos [$i-1]["puntosCirculo"])){
+            if ($unNombre == $arrayJuegos [$i]["jugadorCruz"]&& ($arrayJuegos [$i]["puntosCruz"]> $arrayJuegos [$i]["puntosCirculo"])){
                 $cantJuegosGanados++;
-            }elseif ($unNombre == $arrayJuegos [$i-1]["jugadorCruz"]&& ($arrayJuegos [$i]["puntosCruz"]< $arrayJuegos [$i-1]["puntosCirculo"])){
+            }elseif ($unNombre == $arrayJuegos [$i]["jugadorCruz"]&& ($arrayJuegos [$i]["puntosCruz"]< $arrayJuegos [$i]["puntosCirculo"])){
                 $cantJuegosPerdidos++;
             }else{
                 $cantJuegosEmpatados++;
             }
-            if ($unNombre == $arrayJuegos [$i-1]["jugadorCirculo"]&& ($arrayJuegos [$i-1]["puntosCirculo"]> $arrayJuegos [$i-1]["puntosCruz"])){
+            if ($unNombre == $arrayJuegos [$i]["jugadorCirculo"]&& ($arrayJuegos [$i-1]["puntosCirculo"]> $arrayJuegos [$i]["puntosCruz"])){
                 $cantJuegosGanados++;
-            }elseif ($unNombre == $arrayJuegos [$i-1]["jugadorCirculo"]&& ($arrayJuegos [$i-1]["puntosCirculo"]< $arrayJuegos [$i-1]["puntosCruz"])){
+            }elseif ($unNombre == $arrayJuegos [$i]["jugadorCirculo"]&& ($arrayJuegos [$i-1]["puntosCirculo"]< $arrayJuegos [$i]["puntosCruz"])){
                 $cantJuegosPerdidos++;
             }else{
                 $cantJuegosEmpatados++;
@@ -133,10 +132,10 @@ function agregarJuego($coleccionJuegos, $unJuego){
         if ($cantJuegosGanados>0){
             $totalPuntosJugador = 0;
             for ($i =0; $i<count($arrayJuegos); $i++){
-                if ($unNombre == $arrayJuegos [$i-1]["jugadorCruz"]){ 
-                    $totalPuntosJugador+= $arrayJuegos [$i-1]["puntosCruz"];
-                }elseif ($unNombre == $arrayJuegos [$i-1]["jugadorCirculo"]){
-                    $totalPuntosJugador+= $arrayJuegos[$i-1]["jugadorCirculo"];
+                if ($unNombre == $arrayJuegos [$i]["jugadorCruz"]){ 
+                    $totalPuntosJugador+= $arrayJuegos [$i]["puntosCruz"];
+                }elseif ($unNombre == $arrayJuegos [$i]["jugadorCirculo"]){
+                    $totalPuntosJugador+= $arrayJuegos[$i]["puntosCirculo"];
                 } 
             }
         }   
@@ -227,7 +226,7 @@ do {
         case 5: 
            //opción que muestra en pantalla el resumen de un jugador 
            echo "Ingrese el nombre del jugador para ver su resumen: ";
-           $nombreIngresado = strtoupper(trim(fgets(STDIN)));
+           $nombreIngresado = trim(fgets(STDIN));
            $todosLosJuegos = cargarJuegos();
            $datosJugador = resumirJugador($todosLosJuegos, $nombreIngresado);
             echo "*************************************\n";
