@@ -18,7 +18,7 @@ include_once("tateti.php");
     /*  - Lautaro Morales 
         - FAI[4221] tudw 
         - lautamorales123@gmail.com 
-        - usuario github */
+        - usuario github: lautaromorales */
 
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/
@@ -113,23 +113,23 @@ function agregarJuego($coleccionJuegos, $unJuego){
         $cantJuegosPerdidos = 0;
        
         for ($i = 0; $i < count($arrayJuegos); $i++){
-            if ($unNombre == $arrayJuegos [$i]["jugadorCruz"]&& ($arrayJuegos [$i]["puntosCruz"]> $arrayJuegos [$i]["puntosCirculo"])){
+            if ($unNombre == $arrayJuegos [$i]["jugadorCruz"]&&($arrayJuegos [$i]["puntosCruz"]> $arrayJuegos [$i]["puntosCirculo"])){
                 $cantJuegosGanados++;
-            }elseif ($unNombre == $arrayJuegos [$i]["jugadorCruz"]&& ($arrayJuegos [$i]["puntosCruz"]< $arrayJuegos [$i]["puntosCirculo"])){
-                $cantJuegosPerdidos++;
-            }else{
+            }elseif ($unNombre == $arrayJuegos [$i]["jugadorCruz"]&& ($arrayJuegos [$i]["puntosCruz"]== $arrayJuegos [$i]["puntosCirculo"])){
                 $cantJuegosEmpatados++;
-            }
-            if ($unNombre == $arrayJuegos [$i]["jugadorCirculo"]&& ($arrayJuegos [$i-1]["puntosCirculo"]> $arrayJuegos [$i]["puntosCruz"])){
+            }elseif ($unNombre == $arrayJuegos [$i]["jugadorCruz"]&& ($arrayJuegos [$i]["puntosCruz"]< $arrayJuegos [$i]["puntosCirculo"])) {
+                $cantJuegosPerdidos++;
+            
+            if ($unNombre == $arrayJuegos [$i]["jugadorCirculo"]&& ($arrayJuegos [$i]["puntosCirculo"]> $arrayJuegos [$i]["puntosCruz"])){
                 $cantJuegosGanados++;
-            }elseif ($unNombre == $arrayJuegos [$i]["jugadorCirculo"]&& ($arrayJuegos [$i-1]["puntosCirculo"]< $arrayJuegos [$i]["puntosCruz"])){
-                $cantJuegosPerdidos++;
-            }else{
+            }elseif ($unNombre == $arrayJuegos [$i]["jugadorCirculo"]&& ($arrayJuegos [$i]["puntosCirculo"]== $arrayJuegos [$i]["puntosCruz"])){
                 $cantJuegosEmpatados++;
+            }elseif ($unNombre == $arrayJuegos [$i]["jugadorCirculo"]&& ($arrayJuegos [$i]["puntosCirculo"]< $arrayJuegos [$i]["puntosCruz"])) {
+                $cantJuegosPerdidos++;
             }
            
         }
-        if ($cantJuegosGanados>0){
+        if ($cantJuegosGanados>0||$cantJuegosEmpatados>0||$cantJuegosPerdidos>0){
             $totalPuntosJugador = 0;
             for ($i =0; $i<count($arrayJuegos); $i++){
                 if ($unNombre == $arrayJuegos [$i]["jugadorCruz"]){ 
@@ -152,7 +152,7 @@ function agregarJuego($coleccionJuegos, $unJuego){
         $resumenUnJugador ["puntosAcumulados"] = $totalPuntosJugador;
 
     return $resumenUnJugador;
-    }
+    }}
 
 
 /**************************************/
