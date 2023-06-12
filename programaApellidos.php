@@ -77,7 +77,7 @@ function mostrarDatosJuego($numJuego){
     }else{//($coleccionJuegos[$numJuego]["puntosCruz"] < $coleccionJuegos[$numJuego]["puntosCirculo"])
         $resultado = "(Gano O)";
     }
-
+    
     echo "**********************\n";
     echo "Juego TATETI: ".$numJuego." ".$resultado."\n";
     echo "Jugador X: ".$datosJuego[$numJuego]["jugadorCruz"]." Obtuvo ".$datosJuego[$numJuego]["puntosCruz"]." puntos\n";
@@ -93,10 +93,32 @@ function mostrarDatosJuego($numJuego){
  */
 function agregarJuego($coleccionJuegos, $unJuego){
     // array $coleccionModificada
-    $coleccionModificada = array_push($coleccionJuegos, $unJuego);
-    return $coleccionModificada;  
+    array_push($coleccionJuegos, $unJuego);
+    return $coleccionJuegos;
 }
-   
+
+/** Opcion que muestra el primer juego ganado en base a un nombre solicitado al usuario
+ * @param array $coleccionJuegos
+ * @param string $nombre
+ * @return $indice
+ */
+function primerJuegoGanado($coleccionJuegos,$nombre){
+    //int $i, $indice,
+    //array $nombresJugadores
+    $i = 0;
+    $indice = -1;
+    $nombresJugadores = cargarJuegos();
+    while($i < count($nombresJugadores) && $indice == -1){
+        if($nombre == $nombresJugadores[$i]["jugadorCruz"] && $nombresJugadores[$i]["puntosCruz"] > $nombresJugadores[$i]["puntosCirculo"]
+        || $nombre == $nombresJugadores[$i]["jugadorCirculo"] && $nombresJugadores[$i]["puntosCirculo"] > $nombresJugadores[$i]["puntosCruz"]){
+            $indice = $i; 
+        }
+        $i++;
+    }
+           
+    return $indice;
+}   
+
 
 /**
  * @param array $arrayJuegos
@@ -166,7 +188,7 @@ function agregarJuego($coleccionJuegos, $unJuego){
 
 
 //Inicialización de variables:
-$i = 0;
+$z = 0;
 
 //Proceso:
 
@@ -174,8 +196,8 @@ $i = 0;
 //print_r($juego);
 //imprimirResultado($juego);
 
-
-
+$coleccionActual = cargarJuegos();
+$coleccionModificada = cargarJuegos();
 do {
     $opcion = seleccionarOpcion();
 
@@ -185,16 +207,21 @@ do {
             //opcion que permite jugar al tateti.
             $juego = jugar();
             imprimirResultado($juego);
+            $coleccionModificada = agregarJuego($coleccionActual, $juego);
+            $z = 1;
 
             break;
         case 2: 
             //opcion que muestra un juego de la coleccion en base a un numero solicitado al user.
-            $countJuegos = cargarJuegos();
+            $countJuegos = $coleccionModificada;
             $cantJuegosJugados = count($countJuegos);
-            echo "Ingrese un numero del 0 al ".($cantJuegosJugados - 1).": ";
+            echo "Ingrese un numero del 1 al ".($cantJuegosJugados).": ";
             $nJuego = trim(fgets(STDIN));
-            if ($nJuego >= 0 && $nJuego <= ($cantJuegosJugados - 1)) {
-                mostrarDatosJuego($nJuego);
+            if ($z == 1) {
+                print_r($coleccionModificada[$nJuego - 1]);
+            }
+            elseif ($nJuego >= 0 && $nJuego <= ($cantJuegosJugados)) {
+                mostrarDatosJuego($nJuego - 1);
             }
             else {
                 echo "**********************\n";
@@ -204,19 +231,11 @@ do {
 
             break;
         case 3: 
-            //opcion que muestra el primer juego ganado en base a un nombre solicitado al usuario.
-            echo "Ingrese un nombre de jugador: ";
-            $nombreIngresado = trim(fgets(STDIN));
-            $nombresJugadores = cargarJuegos();
-            while ($i < (count($nombresJugadores)-1) && $nombreIngresado <> ($nombresJugadores[$i]["jugadorCruz"]) && $nombreIngresado <> ($nombresJugadores[$i]["jugadorCirculo"])) {
-                $i = $i + 1;
-            }
-            if ($nombreIngresado == $nombresJugadores[$i]["jugadorCruz"] || $nombreIngresado == $nombresJugadores[$i]["jugadorCirculo"]) {
-                mostrarDatosJuego($i);
-            }
-            else {
-                echo "Ese jugador todavia no jugo :( \n";
-            }
+            echo "Ingrese nombre del jugador: ";
+            $nombreJugador = trim(fgets(STDIN));
+            $nJuegos = cargarJuegos();
+            $primerJuego = primerJuegoGanado($nJuegos,$nombreJugador);
+            mostrarDatosJuego($primerJuego);
 
             break;
         case 4: 
