@@ -5,12 +5,20 @@ include_once("tateti.php");
 /***** DATOS DE LOS INTEGRANTES *******/
 /**************************************/
 
-/* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
-/* ... COMPLETAR ... */
+    /*  - Yatzky Santiago 
+        - FAI[4260] TUDW 
+        - syatz9674@gmail.com 
+        - github: YatzkySantiago */
 
+    /*  - nombre apellido 
+        - legajo carrera 
+        - mail 
+        - usuario github */
 
-
-
+    /*  - nombre apellido 
+        - legajo carrera 
+        - mail 
+        - usuario github */
 
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/
@@ -97,12 +105,13 @@ function agregarJuego($coleccionJuegos, $unJuego){
 /**************************************/
 
 //Declaración de variables:
-// int $opcion, $nJuego
-// array $juego
+// int: $opcion, $nJuego, $cantJuegosJugados, $i
+// array: $juego, $countJuegos, $nombresJugadores
+// string: $nombreIngresado
 
 
 //Inicialización de variables:
-
+$i = 0;
 
 //Proceso:
 
@@ -118,13 +127,15 @@ do {
     
     switch ($opcion) {
         case 1: 
+            //opcion que permite jugar al tateti.
             $juego = jugar();
             imprimirResultado($juego);
 
             break;
         case 2: 
-            $countJuegos /*array sin declarar*/ = cargarJuegos();
-            $cantJuegosJugados /*variable sin declarar*/ = count($countJuegos);
+            //opcion que muestra un juego de la coleccion en base a un numero solicitado al user.
+            $countJuegos = cargarJuegos();
+            $cantJuegosJugados = count($countJuegos);
             echo "Ingrese un numero del 0 al ".($cantJuegosJugados - 1).": ";
             $nJuego = trim(fgets(STDIN));
             if ($nJuego >= 0 && $nJuego <= ($cantJuegosJugados - 1)) {
@@ -138,7 +149,19 @@ do {
 
             break;
         case 3: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            //opcion que muestra el primer juego ganado en base a un nombre solicitado al usuario.
+            echo "Ingrese un nombre de jugador: ";
+            $nombreIngresado = trim(fgets(STDIN));
+            $nombresJugadores = cargarJuegos();
+            while ($i < (count($nombresJugadores)-1) && $nombreIngresado <> ($nombresJugadores[$i]["jugadorCruz"]) && $nombreIngresado <> ($nombresJugadores[$i]["jugadorCirculo"])) {
+                $i = $i + 1;
+            }
+            if ($nombreIngresado == $nombresJugadores[$i]["jugadorCruz"] || $nombreIngresado == $nombresJugadores[$i]["jugadorCirculo"]) {
+                mostrarDatosJuego($i);
+            }
+            else {
+                echo "Ese jugador todavia no jugo :( \n";
+            }
 
             break;
         case 4: 
