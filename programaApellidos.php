@@ -119,63 +119,52 @@ function primerJuegoGanado($coleccionJuegos,$nombre){
     return $indice;
 }   
 
-
 /**
  * @param array $arrayJuegos
  * @param string $unNombre
  * @return array
  */
-    function resumirJugador ($arrayJuegos, $unNombre){
-        //int $cantJuegosGanados
-        //int $cantJuegosPerdidos
-        //int $cantJuegosEmpatados
-        //int $totalPuntosJugador
-        $cantJuegosEmpatados =0;
-        $cantJuegosGanados = 0;
-        $cantJuegosPerdidos = 0;
-       
-        for ($i = 0; $i < count($arrayJuegos); $i++){
-            if ($unNombre == $arrayJuegos [$i]["jugadorCruz"]&&($arrayJuegos [$i]["puntosCruz"]> $arrayJuegos [$i]["puntosCirculo"])){
+function resumirJugador ($arrayJuegos, $unNombre){
+    //int $cantJuegosGanados
+    //int $cantJuegosPerdidos
+    //int $cantJuegosEmpatados
+    //int $totalPuntosJugador
+    $cantJuegosEmpatados =0;
+    $cantJuegosGanados = 0;
+    $cantJuegosPerdidos = 0;
+    $totalPuntosJugador = 0;
+    for ($i = 0; $i < count($arrayJuegos); $i++){
+        if($unNombre == $arrayJuegos [$i]["jugadorCruz"]){
+            if($arrayJuegos [$i]["puntosCruz"] > $arrayJuegos [$i]["puntosCirculo"]){
                 $cantJuegosGanados++;
-            }elseif ($unNombre == $arrayJuegos [$i]["jugadorCruz"]&& ($arrayJuegos [$i]["puntosCruz"]== $arrayJuegos [$i]["puntosCirculo"])){
+            }elseif($arrayJuegos [$i]["puntosCruz"]== $arrayJuegos [$i]["puntosCirculo"]){
                 $cantJuegosEmpatados++;
-            }elseif ($unNombre == $arrayJuegos [$i]["jugadorCruz"]&& ($arrayJuegos [$i]["puntosCruz"]< $arrayJuegos [$i]["puntosCirculo"])) {
-                $cantJuegosPerdidos++;
-            
-            if ($unNombre == $arrayJuegos [$i]["jugadorCirculo"]&& ($arrayJuegos [$i]["puntosCirculo"]> $arrayJuegos [$i]["puntosCruz"])){
-                $cantJuegosGanados++;
-            }elseif ($unNombre == $arrayJuegos [$i]["jugadorCirculo"]&& ($arrayJuegos [$i]["puntosCirculo"]== $arrayJuegos [$i]["puntosCruz"])){
-                $cantJuegosEmpatados++;
-            }elseif ($unNombre == $arrayJuegos [$i]["jugadorCirculo"]&& ($arrayJuegos [$i]["puntosCirculo"]< $arrayJuegos [$i]["puntosCruz"])) {
-                $cantJuegosPerdidos++;
+            }else{ //($arrayJuegos [$i]["puntosCruz"]< $arrayJuegos [$i]["puntosCirculo"])
+            $cantJuegosPerdidos++;
             }
-           
-        }
-        if ($cantJuegosGanados>0||$cantJuegosEmpatados>0||$cantJuegosPerdidos>0){
-            $totalPuntosJugador = 0;
-            for ($i =0; $i<count($arrayJuegos); $i++){
-                if ($unNombre == $arrayJuegos [$i]["jugadorCruz"]){ 
-                    $totalPuntosJugador+= $arrayJuegos [$i]["puntosCruz"];
-                }elseif ($unNombre == $arrayJuegos [$i]["jugadorCirculo"]){
-                    $totalPuntosJugador+= $arrayJuegos[$i]["puntosCirculo"];
-                } 
-            }
-        }   
+            $totalPuntosJugador+= $arrayJuegos [$i]["puntosCruz"];
         
-            
+        }elseif($unNombre == $arrayJuegos [$i]["jugadorCirculo"]){
+            if($arrayJuegos [$i]["puntosCirculo"]> $arrayJuegos [$i]["puntosCruz"]){
+                $cantJuegosGanados++;
+            }elseif($arrayJuegos [$i]["puntosCirculo"]== $arrayJuegos [$i]["puntosCruz"]){
+                $cantJuegosEmpatados++;
+            }else{//($arrayJuegos [$i]["puntosCirculo"]< $arrayJuegos [$i]["puntosCruz"])
+                $cantJuegosPerdidos++;
+            }
+            $totalPuntosJugador+= $arrayJuegos[$i]["puntosCirculo"];
+        }        
+    }  
 
-
-        //array $resumenUnJugador
-        $resumenUnJugador = [];
-        $resumenUnJugador ["nombre"] = $unNombre;
-        $resumenUnJugador ["juegosGanados"] = $cantJuegosGanados;
-        $resumenUnJugador ["juegosPerdidos"] = $cantJuegosPerdidos;
-        $resumenUnJugador ["juegosEmpatados"] = $cantJuegosEmpatados;
-        $resumenUnJugador ["puntosAcumulados"] = $totalPuntosJugador;
+    $resumenUnJugador = [];
+    $resumenUnJugador ["nombre"] = $unNombre;
+    $resumenUnJugador ["juegosGanados"] = $cantJuegosGanados;
+    $resumenUnJugador ["juegosPerdidos"] = $cantJuegosPerdidos;
+    $resumenUnJugador ["juegosEmpatados"] = $cantJuegosEmpatados;
+    $resumenUnJugador ["puntosAcumulados"] = $totalPuntosJugador;
 
     return $resumenUnJugador;
-    }}
-
+} 
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
