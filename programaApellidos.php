@@ -67,9 +67,13 @@ function seleccionarOpcion (){
 /** Muestra en pantalla los datos de un juego
  * @param int $numJuego
  */
-function mostrarDatosJuego($numJuego){
+function mostrarDatosJuego($numJuego, $bandera, $col, $game){
     // array $datosJuego
-    $datosJuego = cargarJuegos();
+    if ($bandera == 0) {
+        $datosJuego = cargarJuegos();
+    } else {
+        $datosJuego = agregarJuego($col, $game);
+    }
     if($datosJuego[$numJuego]["puntosCruz"] == $datosJuego[$numJuego]["puntosCirculo"]){
         $resultado = "(Empate)";
     }elseif($datosJuego[$numJuego]["puntosCruz"] > $datosJuego[$numJuego]["puntosCirculo"]){
@@ -92,7 +96,7 @@ function mostrarDatosJuego($numJuego){
  * @return array
  */
 function agregarJuego($coleccionJuegos, $unJuego){
-    // array $coleccionModificada
+    // array $coleccionJuegos
     array_push($coleccionJuegos, $unJuego);
     return $coleccionJuegos;
 }
@@ -178,12 +182,9 @@ function resumirJugador ($arrayJuegos, $unNombre){
 
 //Inicialización de variables:
 $z = 0;
+$ultimoJuego = 0;
 
 //Proceso:
-
-//$juego = jugar();
-//print_r($juego);
-//imprimirResultado($juego);
 
 $coleccionActual = cargarJuegos();
 $coleccionModificada = cargarJuegos();
@@ -197,6 +198,8 @@ do {
             $juego = jugar();
             imprimirResultado($juego);
             $coleccionModificada = agregarJuego($coleccionActual, $juego);
+            $coleccionActual = $coleccionModificada;
+            $ultimoJuego = $juego;
             $z = 1;
 
             break;
@@ -204,13 +207,13 @@ do {
             //opcion que muestra un juego de la coleccion en base a un numero solicitado al user.
             $countJuegos = $coleccionModificada;
             $cantJuegosJugados = count($countJuegos);
-            echo "Ingrese un numero del 1 al ".($cantJuegosJugados).": ";
+            echo "Ingrese un numero del 0 al ".($cantJuegosJugados -1).": ";
             $nJuego = trim(fgets(STDIN));
             if ($z == 1) {
-                print_r($coleccionModificada[$nJuego - 1]);
+                mostrarDatosJuego($nJuego, $z, $coleccionModificada, $ultimoJuego);
             }
             elseif ($nJuego >= 0 && $nJuego <= ($cantJuegosJugados)) {
-                mostrarDatosJuego($nJuego - 1);
+                mostrarDatosJuego($nJuego, $z, $coleccionActual, $ultimoJuego);
             }
             else {
                 echo "**********************\n";
@@ -224,7 +227,13 @@ do {
             $nombreJugador = trim(fgets(STDIN));
             $nJuegos = cargarJuegos();
             $primerJuego = primerJuegoGanado($nJuegos,$nombreJugador);
-            mostrarDatosJuego($primerJuego);
+            if ($primerJuego == -1) {
+                echo "**********************\n";
+                echo "Ese jugador no existe o no gano \n";
+                echo "**********************\n";
+            } else {
+                mostrarDatosJuego($primerJuego, $z, $coleccionModificada, $ultimoJuego);
+            }
 
             break;
         case 4: 
