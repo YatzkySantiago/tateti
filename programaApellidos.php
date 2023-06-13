@@ -212,7 +212,7 @@ do {
             if ($z == 1) {
                 mostrarDatosJuego($nJuego, $z, $coleccionModificada, $ultimoJuego);
             }
-            elseif ($nJuego >= 0 && $nJuego <= ($cantJuegosJugados)) {
+            elseif ($nJuego >= 0 && $nJuego <= ($cantJuegosJugados -1)) {
                 mostrarDatosJuego($nJuego, $z, $coleccionActual, $ultimoJuego);
             }
             else {
