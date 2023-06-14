@@ -339,7 +339,6 @@ do {
             echo "*************************************\n";
           
            
-    
             break;
         case 6: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 6
