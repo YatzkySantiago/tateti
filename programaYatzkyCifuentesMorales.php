@@ -171,7 +171,7 @@ function validarSimbolos(){
         echo "Ingrese un símbolo X o O: \n";
         $simboloIngresado = trim(fgets(STDIN));
         $simboloIngresado= strtoupper($simboloIngresado); 
-        //Verificamos que el usuario hay ingresado un solo caracter
+        //Verificamos que el usuario haya ingresado un solo caracter
         if (strlen($simboloIngresado)==1){   
             //verificamos que el caracter ingresado sea el correcto
             if (($simboloIngresado)==  "X"|| $simboloIngresado== "O"){  
@@ -191,7 +191,7 @@ function validarSimbolos(){
 /**Función que muestra el total de partidas ganadas, sin tomar en cuenta el jugador
  * @param array $coleccionModif
  */
-function mostrarPartidasGandas($coleccionModif){
+function mostrarPartidasGanadas($coleccionModif){
     //int $cantJuegosGanados
     $cantJuegosGanados = 0;
     for ($i=0; $i< count($coleccionModif); $i++){
@@ -285,12 +285,8 @@ do {
 
             break;
         case 3: 
-<<<<<<< HEAD
-            echo "Ingrese nombre del jugador: "; 
-=======
             //opcion que muestra el primer juego ganado del jugador ingresado.
           echo "Ingrese nombre del jugador: ";
->>>>>>> ca5dcd232a623c86eb3abf0bc7b76ccfd6a825b2
             $nombreJugador = trim(fgets(STDIN));
             if($z == 1){
                 $nJuegos = $coleccionActual;
@@ -316,10 +312,10 @@ do {
             } else {
                 $otroSimbolo = "X";
             }
-            $porcentaje = (calcVictoriasPorSimbolo($coleccionModificada, $simbolo))*100/mostrarPartidasGandas($coleccionModificada);
+            $porcentaje = (calcVictoriasPorSimbolo($coleccionModificada, $simbolo))*100/mostrarPartidasGanadas($coleccionModificada);
             echo "**********************\n";
-            echo "en total se jugaron ".count($coleccionModificada)." juegos de tateti de los cuales ".(count($coleccionModificada)-mostrarPartidasGandas($coleccionModificada))." son empates y ".mostrarPartidasGandas($coleccionModificada)." son partidas ganadas \n";
-            echo "(victorias de $simbolo: ".calcVictoriasPorSimbolo($coleccionModificada, $simbolo)." ; victorias de $otroSimbolo: ".(mostrarPartidasGandas($coleccionModificada)-calcVictoriasPorSimbolo($coleccionModificada, $simbolo)).")\n";
+            echo "en total se jugaron ".count($coleccionModificada)." juegos de tateti de los cuales ".(count($coleccionModificada)-mostrarPartidasGanadas($coleccionModificada))." son empates y ".mostrarPartidasGanadas($coleccionModificada)." son partidas ganadas \n";
+            echo "(victorias de $simbolo: ".calcVictoriasPorSimbolo($coleccionModificada, $simbolo)." ; victorias de $otroSimbolo: ".(mostrarPartidasGanadas($coleccionModificada)-calcVictoriasPorSimbolo($coleccionModificada, $simbolo)).")\n";
             echo $simbolo." gano el: ".$porcentaje."% de los juegos. \n";
             echo "**********************\n";
     
