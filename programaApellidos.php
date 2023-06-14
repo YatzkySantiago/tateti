@@ -200,6 +200,22 @@ function validarSimbolos ()
 return $simboloIngresado;
 }
 
+
+/**Función que muestra el total de partidas ganadas, sin tomar en cuenta el jugador
+ * @param array
+ */
+function mostrarPartidasGandas ($coleccionModif){
+
+    //int $cantJuegosGanados
+    $cantJuegosGanados =0;
+    for ($i=0; $i< count($coleccionModif); $i++){
+        if (($coleccionModif [$i]["puntosCruz"])<> ($coleccionModif [$i]["puntosCirculo"])){
+            $cantJuegosGanados++;
+        }
+    }
+    echo "Se ganaron ".$cantJuegosGanados ." juegos.\n";
+}
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
