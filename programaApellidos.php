@@ -303,7 +303,7 @@ do {
 
             break;
         case 3: 
-            echo "Ingrese nombre del jugador: ";
+            echo "Ingrese nombre del jugador: "; 
             $nombreJugador = trim(fgets(STDIN));
             $nJuegos = cargarJuegos();
             $primerJuego = primerJuegoGanado($nJuegos,$nombreJugador);
