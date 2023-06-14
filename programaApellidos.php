@@ -10,10 +10,10 @@ include_once("tateti.php");
         - syatz9674@gmail.com 
         - github: YatzkySantiago */
 
-    /*  - nombre apellido 
-        - legajo carrera 
-        - mail 
-        - usuario github */
+    /*  - Alexis Cifuentes 
+        - FAI[4412] TUDW
+        - alexiscifuentes943@gmail.com 
+        - usuario github: Alexiscifuentes02 */
 
     /*  - Lautaro Morales 
         - FAI[4221] tudw 
@@ -108,18 +108,17 @@ function agregarJuego($coleccionJuegos, $unJuego){
  */
 function primerJuegoGanado($coleccionJuegos,$nombre){
     //int $i, $indice,
-    //array $nombresJugadores
     $i = 0;
     $indice = -1;
-    $nombresJugadores = cargarJuegos();
-    while($i < count($nombresJugadores) && $indice == -1){
-        if($nombre == $nombresJugadores[$i]["jugadorCruz"] && $nombresJugadores[$i]["puntosCruz"] > $nombresJugadores[$i]["puntosCirculo"]
-        || $nombre == $nombresJugadores[$i]["jugadorCirculo"] && $nombresJugadores[$i]["puntosCirculo"] > $nombresJugadores[$i]["puntosCruz"]){
+    print_r($coleccionJuegos);
+    while($i < count($coleccionJuegos) && $indice == -1){
+        if(($nombre == $coleccionJuegos[$i]["jugadorCruz"] && $coleccionJuegos[$i]["puntosCruz"] > $coleccionJuegos[$i]["puntosCirculo"])
+        || ($nombre == $coleccionJuegos[$i]["jugadorCirculo"] && $coleccionJuegos[$i]["puntosCirculo"] > $coleccionJuegos[$i]["puntosCruz"])){
             $indice = $i; 
         }
         $i++;
     }
-           
+    echo $indice . "\n";
     return $indice;
 }   
 
@@ -305,8 +304,13 @@ do {
         case 3: 
             echo "Ingrese nombre del jugador: ";
             $nombreJugador = trim(fgets(STDIN));
-            $nJuegos = cargarJuegos();
+            if($z == 1){
+                $nJuegos = $coleccionActual;
+            }else{
+                $nJuegos = cargarJuegos();
+            }
             $primerJuego = primerJuegoGanado($nJuegos,$nombreJugador);
+
             if ($primerJuego == -1) {
                 echo "**********************\n";
                 echo "Ese jugador no existe o no gano \n";
