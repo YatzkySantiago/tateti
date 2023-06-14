@@ -130,12 +130,12 @@ function resumirJugador ($arrayJuegos, $unNombre){
     //int $cantJuegosPerdidos
     //int $cantJuegosEmpatados
     //int $totalPuntosJugador
-    $cantJuegosEmpatados =0;
+    $cantJuegosEmpatados = 0;
     $cantJuegosGanados = 0;
     $cantJuegosPerdidos = 0;
     $totalPuntosJugador = 0;
     for ($i = 0; $i < count($arrayJuegos); $i++){
-        if($unNombre == $arrayJuegos [$i]["jugadorCruz"]){
+        if($unNombre == strtolower($arrayJuegos [$i]["jugadorCruz"])){
             if($arrayJuegos [$i]["puntosCruz"] > $arrayJuegos [$i]["puntosCirculo"]){
                 $cantJuegosGanados++;
             }elseif($arrayJuegos [$i]["puntosCruz"]== $arrayJuegos [$i]["puntosCirculo"]){
@@ -145,7 +145,7 @@ function resumirJugador ($arrayJuegos, $unNombre){
             }
             $totalPuntosJugador+= $arrayJuegos [$i]["puntosCruz"];
         
-        }elseif($unNombre == $arrayJuegos [$i]["jugadorCirculo"]){
+        }elseif($unNombre == strtolower($arrayJuegos [$i]["jugadorCirculo"])){
             if($arrayJuegos [$i]["puntosCirculo"]> $arrayJuegos [$i]["puntosCruz"]){
                 $cantJuegosGanados++;
             }elseif($arrayJuegos [$i]["puntosCirculo"]== $arrayJuegos [$i]["puntosCruz"]){
@@ -326,7 +326,7 @@ do {
            //opción que muestra en pantalla el resumen de un jugador 
            echo "Ingrese el nombre del jugador para ver su resumen: ";
            $nombreIngresado = trim(fgets(STDIN));
-           $todosLosJuegos = cargarJuegos();
+           $todosLosJuegos = $coleccionModificada;
            $datosJugador = resumirJugador($todosLosJuegos, $nombreIngresado);
             echo "*************************************\n";
             echo "JUGADOR " .strtoupper($nombreIngresado)."\n";
