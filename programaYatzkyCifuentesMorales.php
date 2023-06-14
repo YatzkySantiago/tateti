@@ -110,15 +110,13 @@ function primerJuegoGanado($coleccionJuegos,$nombre){
     //int $i, $indice,
     $i = 0;
     $indice = -1;
-    print_r($coleccionJuegos);
     while($i < count($coleccionJuegos) && $indice == -1){
-        if(($nombre == $coleccionJuegos[$i]["jugadorCruz"] && $coleccionJuegos[$i]["puntosCruz"] > $coleccionJuegos[$i]["puntosCirculo"])
-        || ($nombre == $coleccionJuegos[$i]["jugadorCirculo"] && $coleccionJuegos[$i]["puntosCirculo"] > $coleccionJuegos[$i]["puntosCruz"])){
+        if(($nombre == strtolower($coleccionJuegos[$i]["jugadorCruz"]) && $coleccionJuegos[$i]["puntosCruz"] > $coleccionJuegos[$i]["puntosCirculo"])
+        || ($nombre == strtolower($coleccionJuegos[$i]["jugadorCirculo"]) && $coleccionJuegos[$i]["puntosCirculo"] > $coleccionJuegos[$i]["puntosCruz"])){
             $indice = $i; 
         }
         $i++;
     }
-    echo $indice . "\n";
     return $indice;
 }   
 
