@@ -216,6 +216,40 @@ function mostrarPartidasGandas ($coleccionModif){
     echo "Se ganaron ".$cantJuegosGanados ." juegos.\n";
 }
 
+/**Modulo que devuelve la cantidad de juegos ganados según un símbolo ingresado  por parámetro
+ * @param array 
+ * @param string
+ * @return int
+ */
+function calcVictoriasPorSimbolo ($coleccionModif, $simboloIngresado){
+    //int $playerCruz 
+    //int $playerCirculo 
+    //$cantVictoriasCirculo
+    //$cantVictoriasCruz
+    //$cantVictoriasSimbolo
+    $cantVictoriasCirculo =0;
+    $cantVictoriasCruz=0;
+        $cantVictoriasSimbolo =0;
+    for ($i=0; $i <count($coleccionModif); $i++){
+        $playerCirculo= $coleccionModif[$i]["puntosCirculo"];
+        $playerCruz= $coleccionModif[$i]["puntosCruz"];
+            if ($playerCirculo > $playerCruz){
+            $cantVictoriasCirculo++;
+            }
+            if ($playerCruz>$playerCirculo){
+            $cantVictoriasCruz++;
+            }
+    }
+    if ($simboloIngresado == "X"){
+     $cantVictoriasSimbolo= $cantVictoriasCruz;
+    }elseif ($simboloIngresado == "O"){
+     $cantVictoriasSimbolo = $cantVictoriasCirculo;
+    }
+  
+return $cantVictoriasSimbolo;
+}
+
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
