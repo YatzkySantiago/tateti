@@ -166,6 +166,36 @@ function resumirJugador ($arrayJuegos, $unNombre){
     return $resumenUnJugador;
 } 
 
+/** Función que solicita al usuario un símbolo, lo verifica y retorna
+ * @return string
+ */
+function validarSimbolos ()
+//boolean $esSimboloValido
+//string $simboloIngresado
+{
+  do{  
+    echo "Ingrese un símbolo X o O: \n";
+    $simboloIngresado = trim(fgets(STDIN));
+    $simboloIngresado= strtoupper($simboloIngresado); 
+    //Verificamos que el usuario hay ingresado un solo caracter
+        if (strlen($simboloIngresado)==1)
+        {   
+            //verificamos que el caracter ingresado sea el correcto
+             if (($simboloIngresado)==  "X"|| $simboloIngresado== "O")
+            {  
+                   $esSimboloValido= true;
+            }else{
+                echo "El símbolo ingresado no es correcto. Pruebe otra vez\n";
+                  $esSimboloValido = false;
+            }
+        }else{
+            echo "El símbolo ingresado no es correcto. Pruebe otra vez\n";
+            $esSimboloValido = false;
+        }
+   }while (!$esSimboloValido);
+return $simboloIngresado;
+}
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -228,7 +258,7 @@ do {
 
             break;
         case 4: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 4
+            //opción que muestra el porcentaje de juegos ganados según un síbolo propiciado por el usuario
     
             break;  
         case 5: 
