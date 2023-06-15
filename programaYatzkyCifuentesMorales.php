@@ -249,15 +249,15 @@ function juegosOrdenadosJugadorO($coleccionModif){
         $jugadoresO = array_unique($jugadoresO);
     }
 
-    function cmp($a, $b) {
-        if ($a == $b) {
-            return 0;
-        }
-        return ($a < $b) ? -1 : 1;
-    }
-
     uasort($jugadoresO, 'cmp');
     print_r($jugadoresO);
+}
+
+function cmp($a, $b) {
+    if ($a == $b) {
+        return 0;
+    }
+    return ($a < $b) ? -1 : 1;
 }
 
 /**************************************/
