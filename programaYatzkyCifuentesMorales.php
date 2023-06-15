@@ -238,6 +238,28 @@ function calcVictoriasPorSimbolo ($coleccionModif, $simboloIngresado){
     return $cantVictoriasSimbolo;
 }
 
+/** Muestra en pantalla la estructura ordenada alfabeticamente por jugador O usando las funciones predefinidas uasort y print_r
+ * @param array $coleccionModif
+ */
+function juegosOrdenadosJugadorO($coleccionModif){
+    // array $jugadoresO
+    $jugadoresO = [];
+    for($i = 0; $i < count($coleccionModif); $i++){
+        $jugadoresO[$i] = strtoupper($coleccionModif[$i]["jugadorCirculo"]);
+        $jugadoresO = array_unique($jugadoresO);
+    }
+
+    function cmp($a, $b) {
+        if ($a == $b) {
+            return 0;
+        }
+        return ($a < $b) ? -1 : 1;
+    }
+
+    uasort($jugadoresO, 'cmp');
+    print_r($jugadoresO);
+}
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -341,8 +363,7 @@ do {
           
             break;
         case 6: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 6
-
+            juegosOrdenadosJugadorO($coleccionModificada);
     
             break;
         case 7: 
