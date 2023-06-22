@@ -294,8 +294,7 @@ do {
             $cantJuegosJugados = count($coleccionDeJuegos); 
             echo "ingrese un numero del 1 al ".$cantJuegosJugados. "\n";
             $indiceJuego = solicitarNumeroEntre(1, $cantJuegosJugados);
-            if ($indiceJuego >= 0 && $indiceJuego <= ($cantJuegosJugados)) 
-            { 
+            if ($indiceJuego >= 0 && $indiceJuego <= ($cantJuegosJugados)) { 
                 mostrarDatosJuego($indiceJuego -1, $coleccionDeJuegos); 
             } 
 
